@@ -2,16 +2,17 @@
 #include <iostream>
 #include <iomanip>
 
+
 using namespace std;
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	cout << "Выберите задачу:\n1.Тестовая\n2.Основная" << endl;
+	cout << "Choose tast:\n1.Test\n2.Main" << endl;
 	int answer;
 	do {
 		cin >> answer;
 		if(answer < 1 || answer > 2)
-			cout << "Неверный номер задачи, попробуйте ещё раз:" << endl;
+			cout << "Wrong number, try again:" << endl;
 	} while (answer < 1 || answer > 2);
 
 	switch (answer) {
@@ -19,40 +20,42 @@ int main() {
 		int n, m;
 		double eps, omega;
 		unsigned int Nmax;
-		cout << "Введите n: ";
+		cout << "n: ";
 		do {
 			cin >> n;
 			if (n < 0)
-				cout << "Число должно быть больше 0:" << endl;
+				cout << "n must be > 0, try again:" << endl;
 		} while (n < 0);
-		cout << "Введите m: ";
+		cout << "m: ";
 		do {
 			cin >> m;
 			if (m < 0)
-				cout << "Число должно быть больше 0:" << endl;
+				cout << "m must be > 0, try again:" << endl;
 		} while (m < 0);
-		cout << "Введите eps: ";
+		cout << "eps: ";
 		do {
 			cin >> eps;
 			if (eps < 0)
-				cout << "Число должно быть больше 0:" << endl;
+				cout << "eps must be > 0, try again:" << endl;
 		} while (eps < 0);
-		cout << "Введите omega: ";
+		cout << "omega: ";
 		do {
 			cin >> omega;
 			if (omega < 0 || omega > 2)
-				cout << "Число должно быть > 0 и < 2:" << endl;
+				cout << "omega must be > 0 and < 2, try again:" << endl;
 		} while (omega < 0 || omega > 2);
-		cout << "Введите Nmax: ";
+		cout << "Nmax: ";
 		do {
 			cin >> Nmax;
 			if (Nmax < 0)
-				cout << "Число должно быть > 0 и < 2:" << endl;
+				cout << "Nmax must be > 0, try again:" << endl;
 		} while (Nmax < 0);
 
 		TestTask task(n, m, eps, omega, Nmax);
 		task.compute();
 		task.printInfo();
+		int a;
+		cin >> a;
 	}
 	}
 

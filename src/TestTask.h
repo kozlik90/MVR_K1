@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 class TestTask
 {
@@ -6,8 +7,8 @@ private:
 	int n, m, iter;
 	double hx, ky, eps, omega, maxDiff, nevyazkaMax, maxError;
 	unsigned int Nmax;
-	double** u;
-	double** Error;
+	std::vector<std::vector<double>> u;
+	std::vector<std::vector<double>> Error;
 	const double PI = 3.14159265358979323846;
 
 public:
