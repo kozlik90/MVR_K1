@@ -207,7 +207,7 @@ void TestTask::compute() {
 }
 
 void TestTask::printInfo() {
-	std::cout << "The number of partitions by x x: n = " << n << " and number of partitions by  y: m = " << m << "\n";
+	std::cout << "The number of partitions by x: n = " << n << " and number of partitions by y: m = " << m << "\n";
 	std::cout << "SOR with the parameter omega = " << omega << ", criteria for stopping by accuracy eps = " << eps << " and by the number of iterations Nmax = " << Nmax << "\n";
 	std::cout << "iterations spent N = " << iter << "; the achieved accuracy of the iterative method eps^(N) = " << maxDiff << "\n";
 	std::cout << "The discrepancy ||R^(N)|| = " << nevyazkaMax << "\n";
