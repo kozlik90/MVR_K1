@@ -1,6 +1,5 @@
 #include "TestTask.h"
 #include "MainTask.h"
-#include "Drawing.h"
 #include <iostream>
 #include <iomanip>
 
@@ -57,8 +56,7 @@ int main(int argc, char** argv) {
 		TestTask task(n, m, eps, omega, Nmax);
 		task.compute();
 		task.printInfo();
-		Drawing draw1(&task);
-		draw1.draw(&argc, argv);
+		
 		break;
 	}
 	case 2: {
