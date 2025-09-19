@@ -79,8 +79,73 @@ void MainTask::calculateChisl(std::vector<std::vector<double>>& v, int n_, int m
 
     } while (maxDiff_ > eps_ && iter_ < Nmax_);
     
+    if(n_ == n) {
+        writeChisl1();
+    }
+    else if (n_ == n2) writeChisl2();
 
     
+}
+
+void MainTask::writeChisl1() {
+    double hx2 = 1.0 / n;
+    double ky2 = 1.0 / m;
+    std::ofstream outFile11("1_chislennoe.csv");
+    if (!outFile11.is_open()) {
+        std::cout << "File 1_chislennoe is not open.\n";
+        //return 1;
+    }
+    outFile11 << ";";
+    for (int i = 0; i <= n; i++) {
+        outFile11 << "x" << i;
+        if (i < n)
+            outFile11 << ";";
+    }
+    outFile11 << "\n";
+    for (int j = 0; j < m + 1; j++) {
+        outFile11 << "y" << j << ";";
+        for (int i = 0; i < n + 1; i++) {
+            double x = j * hx2;
+            double y = i * ky2;
+            outFile11 << std::setprecision(30) << v1[i][j];
+            if (i < n)
+                outFile11 << ";";
+        }
+        outFile11 << "\n";
+    }
+    outFile11.close();
+    std::cout<< "File 1_chislennoe.csv is ready" << std::endl;
+}
+
+void MainTask::writeChisl2() {
+    double h2x = 1.0 / n2;
+    double k2y = 1.0 / m2;
+    std::ofstream outFile22("2_chislennoe.csv");
+    if (!outFile22.is_open()) {
+        std::cout << "File 2_chislennoe is not open.\n";
+        //return 1;
+    }
+    outFile22 << ";";
+    for (int i = 0; i <= n2; i++) {
+        outFile22 << "x" << i*0.5;
+        if (i < n2)
+            outFile22 << ";";
+    }
+    outFile22 << "\n";
+    for (int j = 0; j < m2 + 1; j++) {
+        outFile22 << "y" << j*0.5 << ";";
+        for (int i = 0; i < n2 + 1; i++) {
+            double x = j * h2x;
+            double y = i * k2y;
+            outFile22 << std::setprecision(30) << v2[i][j];
+            if (i < n2)
+                outFile22 << ";";
+            
+        }
+        outFile22 << "\n";
+    }
+    outFile22.close();
+    std::cout << "File 2_chislennoe2.csv is ready" << std::endl;
 }
 
 void MainTask::calculateError() {
@@ -104,7 +169,7 @@ void MainTask::calculateError() {
     }
     outFile33 << "\n";
 
-    double eps1 = 0.0;
+    maxError = 0.0;
     for (int j = 0; j < m + 1; j++) {
         outFile33 << "y" << j << ";";
         for (int i = 0; i < n + 1; i++) {
@@ -114,8 +179,8 @@ void MainTask::calculateError() {
             if (i < n)
                 outFile33 << ";";
             
-            if (diff > eps1) {
-                eps1 = diff;
+            if (diff > maxError) {
+                
                 maxError = diff;
             }
         }
@@ -158,63 +223,7 @@ void MainTask::compute() {
     set_GU(v2, n2, m2);
     set_inter(v2, n2, m2);
     calculateChisl(v1, n, m, eps, omega, Nmax, iter, maxDiff);
-    double hx2 = 1.0 / n;
-    double ky2 = 1.0 / m;
-    double h2x = 1.0 / n2;
-    double k2y = 1.0 / m2;
-    std::ofstream outFile11("1_chislennoe.csv");
-    if (!outFile11.is_open()) {
-        std::cout << "File 1_chislennoe is not open.\n";
-        //return 1;
-    }
-    outFile11 << ";";
-    for (int i = 0; i <= n; i++) {
-        outFile11 << "x" << i;
-        if (i < n)
-            outFile11 << ";";
-    }
-    outFile11 << "\n";
-    for (int j = 0; j < m + 1; j++) {
-        outFile11 << "y" << j << ";";
-        for (int i = 0; i < n + 1; i++) {
-            double x = j * hx2;
-            double y = i * ky2;
-            outFile11 << std::setprecision(30) << v1[i][j];
-            if (i < n)
-                outFile11 << ";";
-        }
-        outFile11 << "\n";
-    }
-    outFile11.close();
-    std::cout<< "File 1_chislennoe.csv is ready" << std::endl;
     calculateChisl(v2, n2, m2, eps2, omega2, Nmax2, iter2, maxDiff2);
-
-    std::ofstream outFile22("2_chislennoe.csv");
-    if (!outFile22.is_open()) {
-        std::cout << "File 2_chislennoe is not open.\n";
-        //return 1;
-    }
-    outFile22 << ";";
-    for (int i = 0; i <= n2; i++) {
-        outFile22 << "x" << i*0.5;
-        if (i < n2)
-            outFile22 << ";";
-    }
-    outFile22 << "\n";
-    for (int j = 0; j < m2 + 1; j++) {
-        outFile22 << "y" << j*0.5 << ";";
-        for (int i = 0; i < n2 + 1; i++) {
-            double x = j * h2x;
-            double y = i * k2y;
-            outFile22 << std::setprecision(30) << v2[i][j];
-            if (i < n2)
-                outFile22 << ";";
-            
-        }
-        outFile22 << "\n";
-    }
-    outFile22.close();
-    std::cout << "File 2_chislennoe2.csv is ready" << std::endl;
     calculateError();
 }
 

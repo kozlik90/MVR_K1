@@ -1,12 +1,14 @@
 #include "TestTask.h"
 #include "MainTask.h"
+#include "Drawing.h"
 #include <iostream>
 #include <iomanip>
 
 
+
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
 	setlocale(LC_ALL, "Rus");
 	cout << "Choose task:\n1.Test\n2.Main" << endl;
 	int answer;
@@ -55,6 +57,8 @@ int main() {
 		TestTask task(n, m, eps, omega, Nmax);
 		task.compute();
 		task.printInfo();
+		Drawing draw1(&task);
+		draw1.draw(&argc, argv);
 		break;
 	}
 	case 2: {

@@ -1,5 +1,6 @@
 #include "TestTask.h"
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -11,16 +12,17 @@ m(m_), u(n+1, std::vector<double>(m+1, 0)), Error(n+1, std::vector<double>(m+1, 
  iter(0), maxDiff(0.0), nevyazkaMax(0.0), maxError(0.0){
 	
 	if (omega >= 2) {
-		omega = 2.0 / (1 + 2 * sin(PI * hx / 2));
+		omega = 2.0 / (1 + 2 * sin(M_PI * hx / 2));
 	}
+
 }
 
 double TestTask::u_func(double x, double y) {
-	return exp(pow(sin(PI * x * y), 2));
+	return exp(pow(sin(M_PI * x * y), 2));
 }
 
 double TestTask::f_func(double x, double y) {
-	return -2 * PI * PI * exp(pow(sin(PI * x * y), 2)) * (y * y * pow(cos(PI * x * y), 2) + x * x * pow(cos(PI * x * y), 2) + pow(sin(PI * x * y), 2) * cos(2 * PI * x * y) * (y * y + x * x));
+	return -2 * M_PI * M_PI * exp(pow(sin(M_PI * x * y), 2)) * (y * y * pow(cos(M_PI * x * y), 2) + x * x * pow(cos(M_PI * x * y), 2) + pow(sin(M_PI * x * y), 2) * cos(2 * M_PI * x * y) * (y * y + x * x));
 }
 
 void TestTask::set_GU() {

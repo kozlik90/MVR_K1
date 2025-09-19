@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+class Drawing;
+
 class TestTask
 {
 private:
@@ -9,15 +11,16 @@ private:
 	unsigned int Nmax;
 	std::vector<std::vector<double>> u;
 	std::vector<std::vector<double>> Error;
-	const double PI = 3.14159265358979323846;
+	
 
 public:
 	TestTask(int, int, double, double, unsigned int);
 	void compute();
 	void printInfo();
+	friend class Drawing;
 
 private:
-	double u_func(double x, double y);
+	static double u_func(double x, double y);
 	double f_func(double x, double y);
 	void set_GU();
 	void set_inter();

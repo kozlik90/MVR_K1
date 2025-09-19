@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+class Drawing;
+
 class MainTask
 {
 private:
@@ -15,9 +17,12 @@ private:
     void calculateChisl(std::vector<std::vector<double>>&, int, int, double, double, unsigned int, int&, double&);
     void calculateError();
     double f_func(double, double);
+    void writeChisl1();
+    void writeChisl2();
 public:
     MainTask(int, int, double, double, unsigned int);
     void compute();
     void printInfo();
+    friend class Drawing;
 };
 
