@@ -1,8 +1,6 @@
 #pragma once
 #include <vector>
 
-class Drawing;
-
 class MainTask
 {
 private:
@@ -23,6 +21,5 @@ public:
     MainTask(int, int, double, double, unsigned int);
     void compute();
     void printInfo();
-    friend class Drawing;
 };
 

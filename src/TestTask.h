@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 
-class Drawing;
 
 class TestTask
 {
@@ -17,7 +16,6 @@ public:
 	TestTask(int, int, double, double, unsigned int);
 	void compute();
 	void printInfo();
-	friend class Drawing;
 
 private:
 	static double u_func(double x, double y);
